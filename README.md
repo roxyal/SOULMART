@@ -7,3 +7,9 @@ SOULMART is an ecommerce website that draws inspiration from platforms like Shop
 * Purchase of goods using Paypal / CreditCards
 * Users can filter categories with respect to their needs (currently only have 2 categories: shoes and shirts)
 * View of purchased goods (history)
+
+# Framework
+Project created by
+* Python Django - Handles all the backend logic
+* Bootstrap - Design the frontend portion with ease
+* SQLite - Using Python inbuilt database
