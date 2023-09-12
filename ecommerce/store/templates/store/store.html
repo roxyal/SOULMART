@@ -1,0 +1,111 @@
+<!-- extends - implies u inherit from the parent  -->
+{% extends "./base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    .product-container {
+        display: flex;
+        flex-wrap: wrap; /* Such that if exceed container, it move next row/col) */
+        justify-content: center;
+        align-items: center;
+        gap: 15px; /* Give a gap space for each of the product-card */
+    }
+
+    .product-card {
+        width: 200px; /* Set the width of each product card */
+        height: auto;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .product-card img {
+        width: 100%; /* Make the image fill the width of the card */
+        height: 250px; /* Set a fixed height for consistency */
+        /* object-fit: contain; 
+        padding-top: 5px; */
+    }
+
+    .product-card a {
+        display: block;
+        margin-top: 10px;
+        font-size: 1.2rem;
+    }
+
+    .product-card h5 {
+        margin-top: 5px;
+        font-size: 1.2rem;
+    }
+
+</style>
+    <!-- Introduction section -->
+  
+    <section class="py-4 text-center container">
+
+        <div class="row py-lg-5">
+        
+            <div class="col-lg-6 col-md-8 mx-auto">
+                
+
+                <h4> Explore Incredible Deals and a Treasure Trove of Products Awaiting You! </h4>
+
+                <br>
+                
+
+                <p class="lead text-muted">
+
+                Browse our extensive collection.
+
+                </p>
+
+                {% if user.is_authenticated %}
+
+                    {% else %}
+                        <br>
+                
+                        <a href="{% url 'register' %}" class="btn btn-primary my-2"><i class="fa fa-user-plus" aria-hidden="true"></i> &nbsp; Create an account </a>
+                
+                {% endif %}
+                
+            </div>
+        
+        </div>
+
+    
+    </section>
+
+       <!-- All products section -->
+      
+       <div class="album py-5 bg-light">
+        
+        <div class="container">
+    
+          <div class="pb-3 h5"> All products </div>
+
+          <hr>
+          <br>
+          
+          <div class="product-container">
+                {% for product in my_products %}
+                    <div class = "product-card">
+                        <img alt="Responsive image" src={{product.image.url}}>
+                        <a class="text-info text-decoration-none" href="{{product.get_absolute_url}}">{{product.title | capfirst}}</a>
+                        <h5>$ {{product.price}}</h5>
+                    </div>
+                {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+{% endblock %}
+
+
+
+
+
+

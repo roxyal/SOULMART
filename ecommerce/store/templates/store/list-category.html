@@ -1,0 +1,72 @@
+{% extends "./base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+<style>
+  .product-container {
+      display: flex;
+      flex-wrap: wrap; /* Such that if exceed container, it move next row/col) */
+      justify-content: center;
+      align-items: center;
+      gap: 15px; /* Give a gap space for each of the product-card */
+  }
+
+  .product-card {
+      width: 200px; /* Set the width of each product card */
+      height: auto;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+  }
+
+  .product-card img {
+        width: 100%; /* Make the image fill the width of the card */
+        height: 250px; /* Set a fixed height for consistency */
+        /* object-fit: contain; 
+        padding-top: 5px; */
+    }
+
+  .product-card a {
+      display: block;
+      margin-top: 10px;
+      font-size: 1.2rem;
+  }
+
+  .product-card h5 {
+      margin-top: 5px;
+      font-size: 1.2rem;
+  }
+
+</style>
+
+<main>
+  
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="pb-3 h5"> {{category.name | capfirst}} </div>
+
+
+      <hr>
+
+      <br>
+
+      <div class="product-container">
+        {% for product in products %}
+            <div class = "product-card">
+                <img alt="Responsive image" src={{product.image.url}}>
+                <a class="text-info text-decoration-none" href="{{product.get_absolute_url}}">{{product.title | capfirst}}</a>
+                <h5>$ {{product.price}}</h5>
+            </div>
+        {% endfor %}
+  </div>
+    </div>
+  </div>
+
+
+</main>
+
+{% endblock %}

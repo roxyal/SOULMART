@@ -1,0 +1,95 @@
+
+{% include "store/base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+    <style>
+
+
+        body{
+
+
+            background-color: gray;
+
+        }
+        .form-layout {
+            border-radius: 20px;
+            width: 500px;
+        } 
+        .order-item-qty-container{
+            position: relative;
+        }
+        .item-name {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .item-qty {
+            position: absolute;
+            top:0;
+            right:0;
+        }
+        .order-item-price {
+            position: relative;
+        }
+        .order-price {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            font-weight: bold;
+        }
+        .dop {
+            font-size: 0.8rem;
+        }
+
+    </style>
+
+    <br>
+
+    <div class="container bg-white shadow-md p-5 form-layout ">
+
+        <h3> <i class="fa fa-list-alt" aria-hidden="true"></i> &nbsp; My orders </h3>
+
+        <p> View all of your orders. </p>
+
+        <hr>
+
+
+    </div>
+
+    <br>
+
+    <div class="container bg-white shadow-md p-5 form-layout ">
+
+        {% for order in orders %}
+            <div>
+                <strong> <i class="fa fa-list-alt" aria-hidden="true"></i> &nbsp;  Order ID # {{order.id}} </strong>
+                <h6 class="dop">Date of Purchased: {{order.date_ordered}}</h6>
+                <br><br>
+                {% for item in order.orderitem_set.all %}
+                    <div class="order-item-qty-container">
+                        <h6 class="item-name">{{item.product}}</h6>
+                        <h6 class="item-qty">x {{item.quantity}}</h6>
+                        <br> <br>
+                    </div>
+                {% endfor %}
+                <div class="order-item-price">
+                    <h6 class="order-price">Total Price: {{order.amount_paid}}</h6>
+                    <br>
+                </div>
+                <hr>
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+
+    <br>
+
+{% endblock %}
